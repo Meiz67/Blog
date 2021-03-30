@@ -43,3 +43,11 @@ def edit_post(request):
     context = {'form': form, 'post_id': post_id}
     return render(request, 'blogs/edit_post.html', context)
     pass
+
+
+def users_posts(request):
+    if request.method != 'POST':
+        user_id = User.objects.get(username=request.GET['user'])
+        posts = BlogPost.objects.all().filter(owner=user_id)
+        context = {'posts': posts, 'owner': user_id}
+    return render(request, 'blogs/users_posts.html', context)
