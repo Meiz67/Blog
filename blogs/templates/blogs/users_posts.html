@@ -8,8 +8,7 @@
         {% for post in posts %}
             <li>
                 <h4>
-                    {{ post.title }}    Author:
-                    <a href="{% url 'blogs:users_posts' %}?user={{ post.owner }}"> {{ post.owner }} </a>
+                    {{ post.title }}
                     ({{ post.date_added|date:'d M Y' }})
                     <a href="{% url 'blogs:edit_post' %}?post_id={{ post.id }}">[Edit]</a>
                 </h4>
