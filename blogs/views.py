@@ -5,10 +5,10 @@ from .forms import PostForm
 
 
 # Create your views here.
-def blog_posts(request):
+def summary(request):
     posts = BlogPost.objects.order_by('date_added')
     context = {'posts': posts}
-    return render(request, 'blogs/blog_posts.html', context)
+    return render(request, 'blogs/index.html', context)
 
 
 def new_post(request):
