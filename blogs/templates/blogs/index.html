@@ -3,23 +3,29 @@
 {% block content %}
 
 <p>There is recent posts:</p>
-<p>
+<div>
+  {% if user.is_authenticated %}
     <a href="{% url 'blogs:new_post' %}">Add new post</a>
+  {% endif %}
     <ul>
-        {% for post in posts %}
-            <li>
-                <h4>
-                    {{ post.title }}    Author:
-                    <a href="{% url 'blogs:users_posts' %}?user={{ post.owner }}"> {{ post.owner }} </a> ({{ post.date_added|date:'d M Y' }})
-                    <a href="{% url 'blogs:edit_post' %}?post_id={{ post.id }}">[Edit]</a>
-                </h4>
-                <p>
-                    {{ post.text }}
-                </p>
-            </li>
-        {% empty %}
-            <li>No posts yet</li>
-        {% endfor %}
+      {% for post in posts %}
+        <li>
+          <h4>
+            {{ post.title }}    Author:
+            <a href="{% url 'blogs:users_posts' %}?user={{ post.owner }}" title="Все посты {{ post.owner }}">
+            {{ post.owner }}
+            </a> ({{ post.date_added|date:'d M Y' }})
+            {% if post.owner.id == user.id %}
+              <a href="{% url 'blogs:edit_post' %}?post_id={{ post.id }}">[Edit]</a>
+            {% endif %}
+          </h4>
+          <p>
+            {{ post.text }}
+          </p>
+        </li>
+      {% empty %}
+        <p>No posts yet</p>
+      {% endfor %}
     </ul>
-</p>
+</div>
 {% endblock content %}
