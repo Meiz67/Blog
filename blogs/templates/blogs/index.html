@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<p>There is recent posts:</p>
+<p>There is recent posts: (<a href="{% url 'blogs:summary' %}?show_all=True">Show all posts</a> )</p>
 <div>
   {% if user.is_authenticated %}
     <a href="{% url 'blogs:new_post' %}">Add new post</a>

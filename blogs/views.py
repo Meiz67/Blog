@@ -9,9 +9,16 @@ from .forms import PostForm
 
 # Create your views here.
 def summary(request):
-    posts = []
-    for user in User.objects.all():
-        posts += BlogPost.objects.filter(owner=user).order_by('-date_added')[:1]
+    try:
+        show_all = True if request.GET['show_all'] == 'True' else False
+    except KeyError:
+        show_all = False
+    if show_all:
+        posts = BlogPost.objects.order_by('-date_added')
+    else:
+        posts = []
+        for user in User.objects.all():
+            posts += BlogPost.objects.filter(owner=user).order_by('-date_added')[:1]
     context = {'posts': posts}
     return render(request, 'blogs/index.html', context)
 
