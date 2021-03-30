@@ -1,0 +1,10 @@
+<h1><a href="{%  url 'blogs:blog_posts' %}">My Blog</a></h1>
+
+{% if user.is_authenticated %}
+    Hello, {{ user.username }}. <a href="{% url 'users:logout' %}">(Log out)</a>
+{% else %}
+    <a href="{% url 'users:login' %}">(Log in)</a> or
+    <a href="{% url 'users:register' %}">(Register)</a>
+{% endif %}
+
+{% block content %}{% endblock content %}
