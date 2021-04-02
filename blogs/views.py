@@ -19,6 +19,7 @@ def summary(request):
         posts = []
         for user in User.objects.all():
             posts += BlogPost.objects.filter(owner=user).order_by('-date_added')[:1]
+
     context = {'posts': posts}
     return render(request, 'blogs/index.html', context)
 
