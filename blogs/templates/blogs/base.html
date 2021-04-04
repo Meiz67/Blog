@@ -25,19 +25,29 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
-                    Hello, {{ user.username }}.
-                    <a href="{% url 'users:logout' %}">(Log out)</a>
+                    <li class="nav-item">
+                        <span class="navbar-text"> Hello, {{ user.username }}.</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:logout' %}">Log out</a>
+                    </li>
                 {% else %}
-                    <a href="{% url 'users:login' %}">(Log in)</a> or
-                    <a href="{% url 'users:register' %}">(Register)</a>
+                    <a class="nav-link" href="{% url 'users:login' %}">Log in</a>
+                    <span class="navbar-text"> or </span>
+                    <a class="nav-link" href="{% url 'users:register' %}">Register</a>
                 {% endif %}
             </ul>
         </div>
     </nav>
 
-{% block content %}{% endblock content %}
-
-
+    <main role="main" class="container">
+        <div class="pb-2 mb-2 border-bottom">
+            {% block page_header %}{% endblock page_header %}
+        </div>
+        <div>
+            {% block content %}{% endblock content %}
+        </div>
+    </main>
 
 </body>
 </html>
